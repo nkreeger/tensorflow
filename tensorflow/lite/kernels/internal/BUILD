@@ -502,10 +502,6 @@ cc_library(
     srcs = [
         "reference/portable_tensor_utils.cc",
     ],
-    hdrs = [
-        "reference/portable_tensor_utils.h",
-        "reference/portable_tensor_utils_impl.h",
-    ],
     deps = [
         ":common",
         ":compatibility",
