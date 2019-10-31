@@ -54,6 +54,7 @@ limitations under the License.
 #ifndef TENSORFLOW_LITE_EXPERIMENTAL_MICRO_TESTING_MICRO_TEST_H_
 #define TENSORFLOW_LITE_EXPERIMENTAL_MICRO_TESTING_MICRO_TEST_H_
 
+#include <time.h>
 #include "tensorflow/lite/experimental/micro/micro_error_reporter.h"
 
 namespace micro_test {
@@ -93,6 +94,7 @@ extern tflite::ErrorReporter* reporter;
 // TODO(petewarden): I'm going to hell for what I'm doing to this poor for loop.
 #define TF_LITE_MICRO_TEST(name)                                           \
   micro_test::reporter->Report("Testing %s", #name);                       \
+  clock_t t = clock();                                                     \
   for (micro_test::is_test_complete = false,                               \
       micro_test::did_test_fail = false;                                   \
        !micro_test::is_test_complete; micro_test::is_test_complete = true, \

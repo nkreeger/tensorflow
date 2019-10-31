@@ -680,6 +680,8 @@ TF_LITE_MICRO_TEST(BlackBoxTestHybridRank1Uint8) {
       output_data, tflite::testing::svdf_input,
       sizeof(tflite::testing::svdf_input),
       tflite::testing::svdf_golden_output_rank_1, 0.002945 /* tolerance */);
+
+  printf(" t: : $ld\n", t - clock());
 }
 
 TF_LITE_MICRO_TEST(BlackBoxTestHybridRank2Uint8) {
