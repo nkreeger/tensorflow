@@ -45,6 +45,12 @@ uint8_t* SimpleMemoryAllocator::AllocateFromHead(size_t size,
         size, available_memory, size - available_memory);
     return nullptr;
   }
+#if DEBUG
+  if (record_allocs_) {
+    recorded_alloc_bytes_ += size;
+    recorded_alloc_count_++;
+  }
+#endif
   head_ = aligned_result + size;
   return aligned_result;
 }
@@ -60,6 +66,12 @@ uint8_t* SimpleMemoryAllocator::AllocateFromTail(size_t size,
         size, size - missing_memory, missing_memory);
     return nullptr;
   }
+#if DEBUG
+  if (record_allocs_) {
+    recorded_alloc_bytes_ += size;
+    recorded_alloc_count_++;
+  }
+#endif
   tail_ = aligned_result;
   return aligned_result;
 }

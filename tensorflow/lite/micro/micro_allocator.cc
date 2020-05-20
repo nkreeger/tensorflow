@@ -403,6 +403,10 @@ TfLiteStatus MicroAllocator::Init() {
         sizeof(TfLiteTensor) * context_->tensors_size);
     return kTfLiteError;
   }
+  TF_LITE_REPORT_ERROR(
+      error_reporter_,
+      "Allocated %d bytes for TfLiteTensor (%d instances)",
+      sizeof(TfLiteTensor) * context_->tensors_size, context_->tensors_size);
 
   // Initialize runtime tensors in context_ using the flatbuffer.
   for (size_t i = 0; i < subgraph_->tensors()->size(); ++i) {

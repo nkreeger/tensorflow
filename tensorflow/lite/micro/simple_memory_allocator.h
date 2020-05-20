@@ -54,6 +54,16 @@ class SimpleMemoryAllocator {
   size_t GetHeadUsedBytes() const { return head_ - buffer_head_; }
   size_t GetTailUsedBytes() const { return buffer_tail_ - tail_; }
 
+#if DEBUG
+  void SetRecordAllocs(bool record) { this.record_allocs_ = record; }
+  void ResetRecordedAllocs() {
+      this.recorded_alloc_bytes_ = 0;
+      this.recorded_alloc_count_ = 0;
+  }
+  void GetRecordedAllocBytes() { return this.recorded_alloc_bytes_; }
+  void GetRecordedAllocCount() { return this.recorded_alloc_count_; }
+#endif
+
  private:
   size_t GetBufferSize() const { return buffer_tail_ - buffer_head_; }
 
@@ -62,6 +72,12 @@ class SimpleMemoryAllocator {
   uint8_t* buffer_tail_;
   uint8_t* head_;
   uint8_t* tail_;
+
+#if DEBUG
+  bool record_allocs_;
+  size_t recorded_alloc_bytes_;
+  size_t recorded_alloc_count_;
+#endif
 };
 
 // Allocate a SimpleMemoryAllocator from the buffer and then return the pointer
